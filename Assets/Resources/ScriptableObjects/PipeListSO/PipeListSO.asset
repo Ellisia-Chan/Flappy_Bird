@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipeObstacleList:
   - {fileID: 984471703727449056, guid: c07d3c9a91fdc5c4a9bacc93e286c13c, type: 3}
-  - {fileID: 3293545569539572133, guid: ffea6696176b1874f9771063776cbe71, type: 3}
-  - {fileID: 2135217130651136161, guid: c248f02a89fa63149bd485014352c427, type: 3}
-  - {fileID: 5453043406227403457, guid: 37856fa3b421cb04687b024e68317908, type: 3}
-  - {fileID: 4419910266353594338, guid: 1bac80e7dc16e5e47acf1cd3144928c7, type: 3}
-  - {fileID: 2637641539980090635, guid: 74fb58de41f2ba0489b0d0f99723daf5, type: 3}
-  - {fileID: 4774825535139790672, guid: 2744fcbe4da135449b5fd8d8e00c6452, type: 3}
-  - {fileID: 3365319218377824717, guid: 5a1fa91c50d2919468ebeb8538d8de3a, type: 3}
+  - {fileID: 8787960882639486912, guid: 607e1bd11e17b314bb3391f4f05be647, type: 3}
+  - {fileID: 84578402305470706, guid: a821c377f7ced494abaee65fcbbfed79, type: 3}
+  - {fileID: 136292495242660070, guid: de565a42586d9ad4eb5544f15c9192c9, type: 3}
+  - {fileID: 6048330188098105540, guid: d204a11d53ca01b49852d67ed7cf54ff, type: 3}
+  - {fileID: 3390151595208685943, guid: 5a2201860944ce04ba3e09a7f8baf94c, type: 3}
+  - {fileID: 7049418101818688696, guid: 9bd40c235879141489e41bcea4870fde, type: 3}
+  - {fileID: 6188364277223154316, guid: 382f705b4abef704380b0dbfd6df2c89, type: 3}
