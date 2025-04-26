@@ -8,7 +8,7 @@ namespace Collectibles {
 
         // Called at the start of the game, this function has a 50% chance of deactivating the coin game object.
         private void Start() {
-            if (Random.value > 0.5f) {
+            if (Random.value > 0.6f) {
                 gameObject.SetActive(false);
             }
         }

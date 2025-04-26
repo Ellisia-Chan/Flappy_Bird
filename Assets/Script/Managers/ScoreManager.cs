@@ -42,5 +42,7 @@ namespace SystemManagers {
             score += amount;
             EventBus.Publish(new CoinValueChangeEvent(score));
         }
+
+        public int GetScore() => score;
     }
 }

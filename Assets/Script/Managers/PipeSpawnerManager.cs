@@ -21,6 +21,7 @@ namespace SystemManagers {
             } else {
                 Debug.LogWarning("PipeSpawnerManager: There is already a PipeSpawnerManager in the scene, destroying this one.");
                 Destroy(gameObject);
+                return;
             }
         }
 
@@ -83,6 +84,12 @@ namespace SystemManagers {
             if (amount % 3 == 0) {
                 if (spawnTimerMax > 1f) {
                     spawnTimerMax -= 0.2f;
+
+                    if (spawnTimerMax < 1f) {
+                        spawnTimerMax = 1f;
+                    }
+
+                    Debug.Log("SpawnTimerMax: " + spawnTimerMax);
                 } else {
                     spawnTimerMax = 1f;
                 }

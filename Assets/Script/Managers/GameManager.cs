@@ -26,6 +26,7 @@ namespace SystemManagers {
             } else {
                 Debug.LogWarning("GameManager: There is already a GameManager in the scene, destroying this one.");
                 Destroy(gameObject);
+                return;
             }
 
             gameState = GameState.WAITING;
@@ -69,7 +70,17 @@ namespace SystemManagers {
 
         private void IncreasePipeSpeed(int amount) {
             if (amount % 2 == 0) {
-                pipeMovementSpeed += 0.3f;
+                if (pipeMovementSpeed < 7.5f) {
+                    pipeMovementSpeed += 0.3f;
+
+                    if (pipeMovementSpeed > 7.5f) {
+                        pipeMovementSpeed = 7.5f;
+                    }
+
+                    Debug.Log("PipeMovementSpeed: " + pipeMovementSpeed); 
+                } else {
+                    pipeMovementSpeed = 7.5f;
+                }
             }
         }
 
