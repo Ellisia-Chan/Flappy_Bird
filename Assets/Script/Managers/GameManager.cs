@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using EventSystem;
 using EventSystem.Events;
@@ -5,6 +6,10 @@ using EventSystem.Events;
 namespace SystemManagers {
     public class GameManager : MonoBehaviour {
         public static GameManager Instance { get; private set; }
+
+        private Action<PlayerInputEventJumpAction> _interactAction;
+        private Action<PipePlayerCollisionEnterEvent> _gameOverAction;
+        private Action<CoinValueChangeEvent> _increasePipeSpeedAction;
 
         private float pipeMovementSpeed = 4f;
 
@@ -21,15 +26,19 @@ namespace SystemManagers {
         /// and sets the initial game state to WAITING.
         /// </summary>
         private void Awake() {
-            if (Instance == null) {
-                Instance = this;
-            } else {
+            if (Instance != null) {
                 Debug.LogWarning("GameManager: There is already a GameManager in the scene, destroying this one.");
                 Destroy(gameObject);
                 return;
             }
 
+            Instance = this;
+
             gameState = GameState.WAITING;
+
+            _interactAction = e => InteractAction();
+            _gameOverAction = e => HandleGameOver();
+            _increasePipeSpeedAction = e => IncreasePipeSpeed(e.amount);
         }
 
         /// <summary>
@@ -37,18 +46,22 @@ namespace SystemManagers {
         /// Subscribes to the PlayerInputEventJumpAction and PipePlayerCollisionEnterEvent events.
         /// </summary>
         private void OnEnable() {
-            EventBus.Subscribe<PlayerInputEventJumpAction>(e => InteractAction());
-            EventBus.Subscribe<PipePlayerCollisionEnterEvent>(e => HandleGameOver());
-            EventBus.Subscribe<CoinValueChangeEvent>(e => IncreasePipeSpeed(e.amount));
+            if (Instance != this) return;
+
+            EventBus.Subscribe(_interactAction);
+            EventBus.Subscribe(_gameOverAction);
+            EventBus.Subscribe(_increasePipeSpeedAction);
         }
 
         /// <summary>
         /// Called when the behaviour becomes disabled and inactive.
         /// </summary>
         private void OnDisable() {
-            EventBus.Unsubscribe<PlayerInputEventJumpAction>(e => InteractAction());
-            EventBus.Unsubscribe<PipePlayerCollisionEnterEvent>(e => HandleGameOver());
-            EventBus.Unsubscribe<CoinValueChangeEvent>(e => IncreasePipeSpeed(e.amount));
+            if (Instance != this) return;
+
+            EventBus.Unsubscribe(_interactAction);
+            EventBus.Unsubscribe(_gameOverAction);
+            EventBus.Unsubscribe(_increasePipeSpeedAction);
         }
 
         /// <summary>

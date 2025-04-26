@@ -1,10 +1,13 @@
 using EventSystem;
 using EventSystem.Events;
+using System;
 using UnityEngine;
 
 namespace SystemManagers {
     public class ScoreManager : MonoBehaviour {
         public static ScoreManager Instance { get; private set; }
+
+        private Action<CoinCollectEvent> _addScoreAction;
 
         private int score = 0;
 
@@ -12,26 +15,33 @@ namespace SystemManagers {
         /// Initializes the ScoreManager instance and ensures only one instance exists in the scene.
         /// </summary>
         private void Awake() {
-            if (Instance == null) {
-                Instance = this;
-            } else {
+            if (Instance != null) {
                 Debug.LogWarning("ScoreManager: There is already a ScoreManager in the scene, destroying this one.");
                 Destroy(gameObject);
+                return;
             }
+
+            Instance = this;
+
+            _addScoreAction = e => AddScore(e.amount);
         }
 
         /// <summary>
         /// Called when the behaviour becomes enabled and active.
         /// </summary>
         private void OnEnable() {
-            EventBus.Subscribe<CoinCollectEvent>(e => AddScore(e.amount));
+            if (Instance != this) return;
+
+            EventBus.Subscribe(_addScoreAction);
         }
 
         /// <summary>
         /// Unsubscribes from the CoinCollectEvent when the ScoreManager is disabled.
         /// </summary>
         private void OnDisable() {
-            EventBus.Unsubscribe<CoinCollectEvent>(e => AddScore(e.amount));
+            if (Instance != this) return;
+
+            EventBus.Unsubscribe(_addScoreAction);
         }
 
         /// <summary>

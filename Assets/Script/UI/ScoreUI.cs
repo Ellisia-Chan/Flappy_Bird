@@ -1,25 +1,30 @@
 using EventSystem;
 using EventSystem.Events;
+using System;
 using TMPro;
 using UnityEngine;
 
 namespace UI {
     public class ScoreUI : MonoBehaviour {
+        private Action<CoinValueChangeEvent> _updateUIAction;
+
         [Header("Score")]
         [SerializeField] private TextMeshProUGUI scoreText;
 
         private void Awake() {
             UpdateUI(0);
+
+            _updateUIAction = e => UpdateUI(e.amount);
         }
 
         /// Called when the behaviour becomes enabled.
         private void OnEnable() {
-            EventBus.Subscribe<CoinValueChangeEvent>(e => UpdateUI(e.amount));
+            EventBus.Subscribe(_updateUIAction);
         }
 
         // Disables the ScoreUI component, unsubscribing from CoinValueChangeEvent to prevent further updates.
         private void OnDisable() {
-            EventBus.Unsubscribe<CoinValueChangeEvent>(e => UpdateUI(e.amount));
+            EventBus.Unsubscribe(_updateUIAction);
         }
 
         /// <summary>

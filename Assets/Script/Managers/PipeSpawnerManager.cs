@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using ScriptableObjects;
 using EventSystem;
@@ -6,6 +7,9 @@ using EventSystem.Events;
 namespace SystemManagers {
     public class PipeSpawnerManager : MonoBehaviour {
         public static PipeSpawnerManager Instance { get; private set; }
+
+        private Action<GameEventStateChange> _handleStateChangeCallback;
+        private Action<CoinValueChangeEvent> _handleCoinValueChangeCallback;
 
         [Header("Pipe Spawner")]
         [SerializeField] private PipeListSO PipeList;
@@ -16,23 +20,30 @@ namespace SystemManagers {
         private bool canSpawn = false;
 
         private void Awake() {
-            if (Instance == null) {
-                Instance = this;
-            } else {
+            if (Instance != null) {
                 Debug.LogWarning("PipeSpawnerManager: There is already a PipeSpawnerManager in the scene, destroying this one.");
                 Destroy(gameObject);
                 return;
             }
+
+            Instance = this;
+
+            _handleStateChangeCallback = e => HandleSpawnState(e.newState);
+            _handleCoinValueChangeCallback = e => DecreaseSpawnTime(e.amount);
         }
 
         private void OnEnable() {
-            EventBus.Subscribe<GameEventStateChange>(e => HandleSpawnState(e.newState));
-            EventBus.Subscribe<CoinValueChangeEvent>(e => DecreaseSpawnTime(e.amount));
+            if (Instance != this) return;
+
+            EventBus.Subscribe(_handleStateChangeCallback);
+            EventBus.Subscribe(_handleCoinValueChangeCallback);
         }
 
         private void OnDisable() {
-            EventBus.Unsubscribe<GameEventStateChange>(e => HandleSpawnState(e.newState));
-            EventBus.Unsubscribe<CoinValueChangeEvent>(e => DecreaseSpawnTime(e.amount));
+            if (Instance != this) return;
+
+            EventBus.Unsubscribe(_handleStateChangeCallback);
+            EventBus.Unsubscribe(_handleCoinValueChangeCallback);
         }
 
         private void Update() {
@@ -57,7 +68,7 @@ namespace SystemManagers {
 
             if (spawnTimer <= 0) {
                 spawnTimer = spawnTimerMax;
-                int randInt = Random.Range(0, PipeList.pipeObstacleList.Count);
+                int randInt = UnityEngine.Random.Range(0, PipeList.pipeObstacleList.Count);
                 GameObject pipe = PipeList.pipeObstacleList[randInt];
 
                 Instantiate(pipe, spawnPosition.position, Quaternion.identity);

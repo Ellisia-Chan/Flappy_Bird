@@ -1,6 +1,6 @@
+using System;
 using EventSystem;
 using EventSystem.Events;
-using UI;
 using UnityEngine;
 
 namespace SystemManagers {
@@ -12,7 +12,7 @@ namespace SystemManagers {
         [SerializeField] private GameObject scoreUI;
         [SerializeField] private GameObject gameOverUI;
 
-        private System.Action<GameEventStateChange> _handleStateChangeCallback;
+        private Action<GameEventStateChange> _handleStateChangeCallback;
 
         private void Awake() {
             if (Instance == null) {
@@ -35,10 +35,14 @@ namespace SystemManagers {
         }
 
         private void OnEnable() {
+            if (Instance != this) return;
+
             EventBus.Subscribe(_handleStateChangeCallback);
         }
 
         private void OnDisable() {
+            if (Instance != this) return;
+
             EventBus.Unsubscribe(_handleStateChangeCallback);
         }
 

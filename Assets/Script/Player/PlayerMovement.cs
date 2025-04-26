@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using EventSystem;
 using EventSystem.Events;
@@ -17,19 +18,25 @@ namespace PlayerSystem {
         private Rigidbody2D rb;
         private bool canJump = false;
 
+        private Action<PlayerInputEventJumpAction> _jumpCallback;
+        private Action<GameEventStateChange> _stateChangeCallback;
+
         private void Awake() {
             rb = GetComponent<Rigidbody2D>();
             rb.gravityScale = 0;
+
+            _jumpCallback = e => HandleJump();
+            _stateChangeCallback = e => HandleJumpState(e.newState);
         }
 
         private void OnEnable() {
-            EventBus.Subscribe<PlayerInputEventJumpAction>(e => HandleJump());
-            EventBus.Subscribe<GameEventStateChange>(e => HandleJumpState(e.newState));
+            EventBus.Subscribe(_jumpCallback);
+            EventBus.Subscribe(_stateChangeCallback);
         }
 
         private void OnDisable() {
-            EventBus.Unsubscribe<PlayerInputEventJumpAction>(e => HandleJump());
-            EventBus.Unsubscribe<GameEventStateChange>(e => HandleJumpState(e.newState));
+            EventBus.Unsubscribe(_jumpCallback);
+            EventBus.Unsubscribe(_stateChangeCallback);
         }
 
         private void FixedUpdate() {
