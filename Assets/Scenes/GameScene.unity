@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 4.5
-  maxFallSpeed: -10
+  maxFallSpeed: -15
 --- !u!50 &661282937
 Rigidbody2D:
   serializedVersion: 5
