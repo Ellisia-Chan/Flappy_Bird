@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipeObstacleList:
   - {fileID: 984471703727449056, guid: c07d3c9a91fdc5c4a9bacc93e286c13c, type: 3}
-  - {fileID: 8787960882639486912, guid: 607e1bd11e17b314bb3391f4f05be647, type: 3}
-  - {fileID: 84578402305470706, guid: a821c377f7ced494abaee65fcbbfed79, type: 3}
-  - {fileID: 136292495242660070, guid: de565a42586d9ad4eb5544f15c9192c9, type: 3}
-  - {fileID: 6048330188098105540, guid: d204a11d53ca01b49852d67ed7cf54ff, type: 3}
-  - {fileID: 3390151595208685943, guid: 5a2201860944ce04ba3e09a7f8baf94c, type: 3}
-  - {fileID: 7049418101818688696, guid: 9bd40c235879141489e41bcea4870fde, type: 3}
-  - {fileID: 6188364277223154316, guid: 382f705b4abef704380b0dbfd6df2c89, type: 3}
+  - {fileID: 8489500138326960622, guid: 607e1bd11e17b314bb3391f4f05be647, type: 3}
+  - {fileID: 1337145956459605334, guid: a821c377f7ced494abaee65fcbbfed79, type: 3}
+  - {fileID: 7983807547881293705, guid: de565a42586d9ad4eb5544f15c9192c9, type: 3}
+  - {fileID: 5627171404578545696, guid: d204a11d53ca01b49852d67ed7cf54ff, type: 3}
+  - {fileID: 3502872383807875356, guid: 5a2201860944ce04ba3e09a7f8baf94c, type: 3}
+  - {fileID: 5351561656657183825, guid: 9bd40c235879141489e41bcea4870fde, type: 3}
+  - {fileID: 3046730772830295930, guid: 382f705b4abef704380b0dbfd6df2c89, type: 3}
+  - {fileID: 881636041071464987, guid: bfe316dbb6d7c5647bb8ad6be3d79790, type: 3}
+  - {fileID: 4012907696356419589, guid: 83e3dbb1401520a41982ad0f1b2c6aff, type: 3}
+  - {fileID: 8846046512210251734, guid: 33f10b9181518e74182a7b6100d3c4a4, type: 3}

@@ -14,6 +14,10 @@ namespace SystemManagers {
 
         private GameState gameState;
 
+        /// <summary>
+        /// Initializes the GameManager instance, ensuring only one instance exists in the scene,
+        /// and sets the initial game state to WAITING.
+        /// </summary>
         private void Awake() {
             if (Instance == null) {
                 Instance = this;
@@ -25,16 +29,27 @@ namespace SystemManagers {
             gameState = GameState.WAITING;
         }
 
+        /// <summary>
+        /// Called when the behaviour becomes enabled and active.
+        /// Subscribes to the PlayerInputEventJumpAction and PipePlayerCollisionEnterEvent events.
+        /// </summary>
         private void OnEnable() {
             EventBus.Subscribe<PlayerInputEventJumpAction>(e => InteractAction());
             EventBus.Subscribe<PipePlayerCollisionEnterEvent>(e => HandleGameOver());
         }
 
+        /// <summary>
+        /// Called when the behaviour becomes disabled and inactive.
+        /// </summary>
         private void OnDisable() {
             EventBus.Unsubscribe<PlayerInputEventJumpAction>(e => InteractAction());
             EventBus.Unsubscribe<PipePlayerCollisionEnterEvent>(e => HandleGameOver());
         }
 
+        /// <summary>
+        /// Handles the player's interaction action,
+        /// transitioning the game state from WAITING to PLAYING if applicable.
+        /// </summary>
         private void InteractAction() {
             if (gameState == GameState.WAITING) {
                 gameState = GameState.PLAYING;
@@ -42,11 +57,16 @@ namespace SystemManagers {
             }
         }
 
+        // Handles the game over state by updating the game state and publishing a game event state change.
         private void HandleGameOver() {
             gameState = GameState.GAMEOVER;
             EventBus.Publish(new GameEventStateChange(gameState));
         }
 
+        /// <summary>
+        /// Gets the current game state.
+        /// </summary>
+        /// <returns>The current game state.</returns>
         public GameState GetGameState() => gameState;
     }
 }
