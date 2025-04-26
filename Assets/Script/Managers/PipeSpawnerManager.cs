@@ -10,8 +10,8 @@ namespace SystemManagers {
         [Header("Pipe Spawner")]
         [SerializeField] private PipeListSO PipeList;
         [SerializeField] private Transform spawnPosition;
-        
-        private float spawnTimerMax = 3f;
+
+        private float spawnTimerMax = 2.5f;
         private float spawnTimer;
         private bool canSpawn = false;
 
@@ -26,18 +26,26 @@ namespace SystemManagers {
 
         private void OnEnable() {
             EventBus.Subscribe<GameEventStateChange>(e => HandleSpawnState(e.newState));
+            EventBus.Subscribe<CoinValueChangeEvent>(e => DecreaseSpawnTime(e.amount));
         }
 
         private void OnDisable() {
             EventBus.Unsubscribe<GameEventStateChange>(e => HandleSpawnState(e.newState));
+            EventBus.Unsubscribe<CoinValueChangeEvent>(e => DecreaseSpawnTime(e.amount));
         }
 
         private void Update() {
             if (canSpawn) {
-                HandleSpawn(); 
+                HandleSpawn();
             }
         }
 
+        /// <summary>
+        /// Handles the spawning of pipes in the game.
+        /// This function is called every frame and is responsible for 
+        /// decrementing the spawn timer, checking if it's time to spawn a new pipe, 
+        /// and instantiating a random pipe from the PipeList at the spawn position.
+        /// </summary>
         private void HandleSpawn() {
             spawnTimer -= Time.deltaTime;
 
@@ -55,11 +63,29 @@ namespace SystemManagers {
             }
         }
 
+        /// <summary>
+        /// Handles the game state change event and updates the canSpawn flag accordingly.
+        /// </summary>
+        /// <param name="newState">The new game state.</param>
         private void HandleSpawnState(GameManager.GameState newState) {
             if (newState == GameManager.GameState.PLAYING) {
                 canSpawn = true;
             } else {
                 canSpawn = false;
+            }
+        }
+
+        /// <summary>
+        /// Decreases the spawn timer maximum value by a certain amount.
+        /// </summary>
+        /// <param name="amount">The amount to decrease the spawn timer by.</param>
+        private void DecreaseSpawnTime(int amount) {
+            if (amount % 3 == 0) {
+                if (spawnTimerMax > 1f) {
+                    spawnTimerMax -= 0.2f;
+                } else {
+                    spawnTimerMax = 1f;
+                }
             }
         }
     }

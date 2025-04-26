@@ -5,14 +5,15 @@ namespace PipeObstacle {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PipeMovement : MonoBehaviour {
         [Header("Movement")]
-        [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float decelerationSpeed = 1f;
 
         private Rigidbody2D rb;
         private bool canMove = false;
+        private float moveSpeed;
 
         private void Awake() {
             rb = GetComponent<Rigidbody2D>();
+            moveSpeed = GameManager.Instance.GetPipeMovementSpeed();
         }
 
         private void Update() {

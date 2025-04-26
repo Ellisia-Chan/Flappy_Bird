@@ -6,6 +6,8 @@ namespace SystemManagers {
     public class GameManager : MonoBehaviour {
         public static GameManager Instance { get; private set; }
 
+        private float pipeMovementSpeed = 4f;
+
         public enum GameState {
             WAITING,
             PLAYING,
@@ -36,6 +38,7 @@ namespace SystemManagers {
         private void OnEnable() {
             EventBus.Subscribe<PlayerInputEventJumpAction>(e => InteractAction());
             EventBus.Subscribe<PipePlayerCollisionEnterEvent>(e => HandleGameOver());
+            EventBus.Subscribe<CoinValueChangeEvent>(e => IncreasePipeSpeed(e.amount));
         }
 
         /// <summary>
@@ -44,6 +47,7 @@ namespace SystemManagers {
         private void OnDisable() {
             EventBus.Unsubscribe<PlayerInputEventJumpAction>(e => InteractAction());
             EventBus.Unsubscribe<PipePlayerCollisionEnterEvent>(e => HandleGameOver());
+            EventBus.Unsubscribe<CoinValueChangeEvent>(e => IncreasePipeSpeed(e.amount));
         }
 
         /// <summary>
@@ -63,10 +67,18 @@ namespace SystemManagers {
             EventBus.Publish(new GameEventStateChange(gameState));
         }
 
+        private void IncreasePipeSpeed(int amount) {
+            if (amount % 2 == 0) {
+                pipeMovementSpeed += 0.3f;
+            }
+        }
+
         /// <summary>
         /// Gets the current game state.
         /// </summary>
         /// <returns>The current game state.</returns>
         public GameState GetGameState() => gameState;
+
+        public float GetPipeMovementSpeed() => pipeMovementSpeed;
     }
 }
