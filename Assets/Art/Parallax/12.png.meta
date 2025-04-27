@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 58c7cb24b0dfd6e49b71ce5c22baf3c9
+guid: 35697da93626b1c42b77c45bc122dcc5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5118190954579182322
-    second: awie_death_0
+      213: -1540426309290004842
+    second: 12_0
+  - first:
+      213: 6771243069604559848
+    second: 12_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,10 +51,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 280
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: awie_death_0
+      name: 12_0
       rect:
         serializedVersion: 2
-        x: 490
-        y: 318
-        width: 588
-        height: 849
+        x: 3
+        y: 249
+        width: 165
+        height: 333
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e0db0b3b17888f8b0800000000000000
-      internalID: -5118190954579182322
+      spriteID: 69e6a18ee6e4f9ae0800000000000000
+      internalID: -1540426309290004842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 12_1
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 249
+        width: 114
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ebfa9b32b948fd50800000000000000
+      internalID: 6771243069604559848
       vertices: []
       indices: 
       edges: []
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      awie_death_0: -5118190954579182322
+      12_0: -1540426309290004842
+      12_1: 6771243069604559848
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
