@@ -83,16 +83,17 @@ namespace SystemManagers {
 
         private void IncreasePipeSpeed(int amount) {
             if (amount % 2 == 0) {
-                if (pipeMovementSpeed < 7f) {
+                if (pipeMovementSpeed < 8f) {
                     pipeMovementSpeed += 0.3f;
 
-                    if (pipeMovementSpeed > 7f) {
-                        pipeMovementSpeed = 7f;
+                    if (pipeMovementSpeed > 8f) {
+                        pipeMovementSpeed = 8f;
                     }
 
+                    Debug.Log("PipeMovementSpeed: " + pipeMovementSpeed);
                     EventBus.Publish(new PipeSpeedChangeEvent(pipeMovementSpeed));
                 } else {
-                    pipeMovementSpeed = 7f;
+                    pipeMovementSpeed = 8f;
                 }
             }
         }
