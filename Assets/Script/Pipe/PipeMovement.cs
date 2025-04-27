@@ -28,7 +28,7 @@ namespace PipeObstacle {
 
         private void FixedUpdate() {
             if (canMove) {
-                rb.linearVelocity = new Vector2(-moveSpeed, 0f); 
+                rb.linearVelocity = new Vector2(moveSpeed, 0f); 
             } else {
                 rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, decelerationSpeed * Time.fixedDeltaTime);
             }
