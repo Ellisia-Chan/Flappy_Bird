@@ -1,36 +1,38 @@
-using SystemManagers;
 using EventSystem;
 using EventSystem.Events;
-using UnityEngine;
 using System;
-using Misc;
+using SystemManagers;
+using UnityEngine;
 
 namespace Environment.Ground {
     public class GroundMovement : MonoBehaviour {
-        [SerializeField] private float decelerationSpeed = 1f;
+        [SerializeField] private float width = 20f;
 
-        private Action<PipeSpeedChangeEvent> OnPipeSpeedChange;
+        private Action<PipeSpeedChangeEvent> OnSpeedChange;
 
-        private Rigidbody2D rb;
-        private float groudSpeed;
+        private SpriteRenderer spriteRenderer;
+
+        private Vector2 startSize;
+        private float speed;
         private bool canMove;
 
         private void Awake() {
-            rb = GetComponent<Rigidbody2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            startSize = new Vector2(spriteRenderer.size.x, spriteRenderer.size.y);
 
-            OnPipeSpeedChange = e => { groudSpeed = e.speed; };
-        }
-
-        private void Start() {
-            groudSpeed = GameManager.Instance.GetPipeMovementSpeed();
+            OnSpeedChange = e => { speed = e.speed; };
         }
 
         private void OnEnable() {
-            EventBus.Subscribe(OnPipeSpeedChange);
+            EventBus.Subscribe(OnSpeedChange);
         }
 
         private void OnDisable() {
-            EventBus.Unsubscribe(OnPipeSpeedChange);
+            EventBus.Unsubscribe(OnSpeedChange);
+        }
+
+        private void Start() {
+            speed = GameManager.Instance.GetPipeMovementSpeed();
         }
 
         private void Update() {
@@ -41,13 +43,15 @@ namespace Environment.Ground {
                     canMove = false;
                 }
             }
-        }
 
-        private void FixedUpdate() {
             if (canMove) {
-                rb.linearVelocity = new Vector2(groudSpeed, 0);
+                spriteRenderer.size = new Vector2(spriteRenderer.size.x - speed * Time.deltaTime, spriteRenderer.size.y);
+
+                if (spriteRenderer.size.x < width) {
+                    spriteRenderer.size = startSize;
+                } 
             } else {
-                rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, decelerationSpeed * Time.fixedDeltaTime);
+                spriteRenderer.size = Vector2.Lerp(spriteRenderer.size, startSize, Time.deltaTime);
             }
         }
     }
