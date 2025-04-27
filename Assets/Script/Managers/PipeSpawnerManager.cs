@@ -99,7 +99,6 @@ namespace SystemManagers {
                     if (spawnTimerMax < 1f) {
                         spawnTimerMax = 1f;
                     }
-
                     Debug.Log("SpawnTimerMax: " + spawnTimerMax);
                 } else {
                     spawnTimerMax = 1f;

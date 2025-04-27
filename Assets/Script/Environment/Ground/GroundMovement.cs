@@ -1,26 +1,28 @@
-using UnityEngine;
 using SystemManagers;
-using System;
-using EventSystem.Events;
 using EventSystem;
+using EventSystem.Events;
+using UnityEngine;
+using System;
+using Misc;
 
-namespace PipeObstacle {
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class PipeMovement : MonoBehaviour {
-        [Header("Movement")]
+namespace Environment.Ground {
+    public class GroundMovement : MonoBehaviour {
         [SerializeField] private float decelerationSpeed = 1f;
 
         private Action<PipeSpeedChangeEvent> OnPipeSpeedChange;
 
         private Rigidbody2D rb;
-        private bool canMove = false;
-        private float moveSpeed;
+        private float groudSpeed;
+        private bool canMove;
 
         private void Awake() {
             rb = GetComponent<Rigidbody2D>();
-            moveSpeed = GameManager.Instance.GetPipeMovementSpeed();
 
-            OnPipeSpeedChange = e => moveSpeed = e.speed;
+            OnPipeSpeedChange = e => { groudSpeed = e.speed; };
+        }
+
+        private void Start() {
+            groudSpeed = GameManager.Instance.GetPipeMovementSpeed();
         }
 
         private void OnEnable() {
@@ -43,7 +45,7 @@ namespace PipeObstacle {
 
         private void FixedUpdate() {
             if (canMove) {
-                rb.linearVelocity = new Vector2(moveSpeed, 0f);
+                rb.linearVelocity = new Vector2(groudSpeed, 0);
             } else {
                 rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, decelerationSpeed * Time.fixedDeltaTime);
             }

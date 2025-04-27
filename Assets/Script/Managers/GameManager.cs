@@ -90,7 +90,7 @@ namespace SystemManagers {
                         pipeMovementSpeed = 7.5f;
                     }
 
-                    Debug.Log("PipeMovementSpeed: " + pipeMovementSpeed); 
+                    EventBus.Publish(new PipeSpeedChangeEvent(pipeMovementSpeed));
                 } else {
                     pipeMovementSpeed = 7.5f;
                 }
