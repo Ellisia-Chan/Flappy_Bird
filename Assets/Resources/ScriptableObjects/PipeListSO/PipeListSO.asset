@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipeObstacleList:
   - {fileID: 984471703727449056, guid: c07d3c9a91fdc5c4a9bacc93e286c13c, type: 3}
-  - {fileID: 3665724384812644477, guid: edea85f14c0879c4a89e1002739866cf, type: 3}
   - {fileID: 1380973539699814716, guid: d12f6b499a842a14785d8337d90e0de6, type: 3}
   - {fileID: 2211202499568824580, guid: f99fdde2d1c6b0245a469b9ca28ead6c, type: 3}
   - {fileID: 5550489942060615323, guid: 180dea492fe2dd34d9d9cc1af669ddd3, type: 3}
