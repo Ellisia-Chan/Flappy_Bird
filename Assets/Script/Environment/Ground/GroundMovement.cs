@@ -51,7 +51,7 @@ namespace Environment.Ground {
                     spriteRenderer.size = startSize;
                 } 
             } else {
-                spriteRenderer.size = Vector2.Lerp(spriteRenderer.size, startSize, Time.deltaTime);
+                //spriteRenderer.size = Vector2.Lerp(spriteRenderer.size, startSize, Time.deltaTime);
             }
         }
     }
