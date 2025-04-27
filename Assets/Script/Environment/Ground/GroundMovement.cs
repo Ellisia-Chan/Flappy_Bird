@@ -12,7 +12,7 @@ namespace Environment.Ground {
 
         private SpriteRenderer spriteRenderer;
 
-        private Vector2 startSize;
+        private Vector2 startSize;gi
         private float speed;
         private bool canMove;
 
