@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: efc0c9453c616c546a63a63fdb9d76db
+guid: 2b602abe383182243b2d6ecb636cb2d5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1916529402041650133
-    second: ezgif-frame-008_0
+      213: 561905439023747735
+    second: ezgif-frame-pickup-coin_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ezgif-frame-008_0
+      name: ezgif-frame-pickup-coin_0
       rect:
         serializedVersion: 2
-        x: 151
-        y: 57
-        width: 265
-        height: 342
+        x: 141
+        y: 48
+        width: 273
+        height: 350
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5dbc8424651e89a10800000000000000
-      internalID: 1916529402041650133
+      spriteID: 792de5a050a4cc700800000000000000
+      internalID: 561905439023747735
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ca862b83cb61aeb49b17a19b12f7a331
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ezgif-frame-008_0: 1916529402041650133
+      ezgif-frame-pickup-coin_0: 561905439023747735
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
